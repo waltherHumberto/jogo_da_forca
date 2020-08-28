@@ -54,10 +54,30 @@ void escolhepalavra()
 sprintf(palavrasecreta, "MELANCIA");
 }
 
+int enforcou ()
+{ int erros=0;
+    for(int x=0;x<tentativas;x++)
+    {
+        int existe=0;
+        for (int y=0;y<strlen(palavrasecreta);y++)
+        {
+            if (chutes[x]==palavrasecreta[y])
+            {
+                existe=1;
+                break;
+            }
+        }
+        if(!existe)
+        {
+            erros++;
+        }
+    }
+return erros >=5;
+}
 int main() {
 
 		int acertou = 0;
-	int enforcou = 0;
+
 
 	escolhepalavra(palavrasecreta);	
 abertura();
@@ -70,6 +90,6 @@ abertura();
 		chuta(chutes, &tentativas);
 
 
-	} while (!acertou && !enforcou);
+	} while (!acertou && !enforcou());
 
 }
