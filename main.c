@@ -52,10 +52,45 @@ if(achou) {
 		}
 
 }
+void adicionapalavra()
+{ 
+    char quer;
+        printf("voce deseja adicionar uma nova palavra no jogo ? (S/N)\n\n");
+            scanf(" %c",&quer);
+
+        if (quer =='S')
+        {
+        char novapalvra[20];
+            printf("qual a nova palavra?");
+               scanf("%s", novapalvra);
+
+               FILE* f;
+               f=fopen("palavras.txt","r+");
+                if (f==0)
+    {
+        printf("desculpe, banco de dados nao disponivel\n\n");
+        exit(1);
+    }
+            int qtd;
+            fscanf(f,"%d",&qtd);
+                 qtd++;
+                 fseek(f,0,SEEK_SET);
+                    fprintf(f,"%d",qtd);
+
+                fseek(f,0,SEEK_END);
+                 fprintf(f,"\n%s",novapalvra);
+                     fclose(f);
+        }
+}
 void escolhepalavra()
 {   
     FILE* f;
     f=fopen("palavras.txt","r");
+    if (f==0)
+    {
+        printf("desculpe, banco de dados nao disponivel\n\n");
+        exit(1);
+    }
         int qtdepalavras;
     fscanf(f, "%d", &qtdepalavras);
 
@@ -100,17 +135,24 @@ int acertou() {
 }
 int main() {
 
-	escolhepalavra(palavrasecreta);	
-abertura();
+    //adicionapalavra();
+     abertura();
+    escolhepalavra();	
+   
 
 	do {
-		desenhaforca(palavrasecreta,chutes,chutesdados);
+		desenhaforca();
 			
 		    printf("\n");
 
-		chuta(chutes, &chutesdados);
+		chuta();
 
 
 	} while (!acertou() && !enforcou());
+
+
+
+        adicionapalavra();
+
 
 }
