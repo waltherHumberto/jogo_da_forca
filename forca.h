@@ -1,4 +1,4 @@
-#define Tamanho_plv 20;
+#define Tamanho_plv 20
 
 int enforcou();
 void abertura();
@@ -8,4 +8,5 @@ int ganhou();
 void desenhaforca();
 void escolhepalavra();
 void adicionapalavra();
+int chuteserrados();
 
